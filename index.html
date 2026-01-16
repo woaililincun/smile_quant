@@ -13,34 +13,65 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
-    html, body {
-      background-color: #121212;
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
+    /* 1. 强制深色背景，防止闪烁 */
+    body { 
+      background-color: #121212; 
+      margin: 0; 
+      height: 100vh; 
+      width: 100vw; 
+      overflow: hidden; 
       -webkit-tap-highlight-color: transparent;
     }
-    .loading-text {
+    
+    /* 2. 加载动画 */
+    .loading-container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #888;
-      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #333;
+      border-top: 4px solid #BB86FC;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
+
+  <script>
+    const serviceWorkerVersion = "1411284011";
+  </script>
+  <!-- 引入刚才生成的 flutter.js -->
+  <script src="flutter.js" defer></script>
 </head>
 <body>
-  <div class="loading-text">Loading SmileQuant...</div>
+  <div class="loading-container">
+    <div class="spinner"></div>
+  </div>
 
-  <!-- 【重点修改】在这里强制指定 CanvasKit 渲染器 -->
-  <script type="text/javascript">
-    window.flutterWebRenderer = "canvaskit";
+  <script>
+    window.addEventListener('load', function(ev) {
+      // 使用 flutter.js 提供的加载器
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          // 【核心】强制使用 canvaskit 渲染，彻底解决华为手机闪烁
+          engineInitializer.initializeEngine({
+            renderer: "canvaskit"
+          }).then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
   </script>
-
-  <!-- 加载主程序 -->
-  <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
