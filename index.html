@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- 基础路径设置 -->
   <base href="/smile_quant/">
-
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="SmileQuant">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SmileQuant">
-  
   <title>SmileQuant</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- 样式：设置深色背景 -->
   <style>
-    body { background-color: #121212; margin: 0; padding: 0; }
+    html, body {
+      background-color: #121212;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .loading-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #888;
+      font-family: sans-serif;
+    }
   </style>
-
-  <!-- 关键：强制使用 HTML 渲染模式，解决黑屏卡顿 -->
-  <script type="text/javascript">
-    window.flutterWebRenderer = "html";
-  </script>
 </head>
 <body>
-  <!-- 核心：加载 Flutter 程序的脚本 -->
-  <!-- 你的旧文件里缺少了这一句，所以程序没运行 -->
+  <div class="loading-text">Loading SmileQuant...</div>
+
+  <!-- 【重点修改】在这里强制指定 CanvasKit 渲染器 -->
+  <script type="text/javascript">
+    window.flutterWebRenderer = "canvaskit";
+  </script>
+
+  <!-- 加载主程序 -->
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
