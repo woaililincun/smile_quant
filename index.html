@@ -1,42 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
+  <!-- 基础路径设置 -->
   <base href="/smile_quant/">
-
-  <head>
-  <!-- 原有的 base href, 暂时不动它，后面编译时我们会自动处理 -->
-  <!-- <base href="/smile_quant/"> -->
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="笑脸量化策略日报">
-
-  <!-- iOS meta tags & icons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="SmileQuant">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="SmileQuant">
   
-  <!-- 防止用户双指缩放破坏布局 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
   <title>SmileQuant</title>
   <link rel="manifest" href="manifest.json">
-  
-  <!-- 设置背景色为深色，避免加载时闪白屏 -->
+
+  <!-- 样式：设置深色背景 -->
   <style>
-    body { background-color: #121212; }
+    body { background-color: #121212; margin: 0; padding: 0; }
   </style>
+
+  <!-- 关键：强制使用 HTML 渲染模式，解决黑屏卡顿 -->
+  <script type="text/javascript">
+    window.flutterWebRenderer = "html";
+  </script>
 </head>
+<body>
+  <!-- 核心：加载 Flutter 程序的脚本 -->
+  <!-- 你的旧文件里缺少了这一句，所以程序没运行 -->
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
