@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- 基础路径设置 -->
   <base href="/smile_quant/">
-
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="SmileQuant">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SmileQuant">
   
   <title>SmileQuant</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- 样式：设置深色背景 -->
   <style>
-    body { background-color: #121212; margin: 0; padding: 0; }
+    /* 强制背景色，防止键盘弹出时露出浏览器底色 */
+    html, body {
+      background-color: #121212;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* 禁止滚动，交给 Flutter 处理 */
+      -webkit-tap-highlight-color: transparent; /* 取消点击高亮 */
+    }
+    
+    /* 加载时的居中提示 */
+    .loading-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #888;
+      font-family: sans-serif;
+    }
   </style>
-
-  <!-- 关键：强制使用 HTML 渲染模式，解决黑屏卡顿 -->
-  <script type="text/javascript">
-    window.flutterWebRenderer = "html";
-  </script>
 </head>
 <body>
-  <!-- 核心：加载 Flutter 程序的脚本 -->
-  <!-- 你的旧文件里缺少了这一句，所以程序没运行 -->
+  <!-- 即使 JS 还没加载完，先显示这个，避免黑屏 -->
+  <div class="loading-text">Loading SmileQuant...</div>
+
+  <!-- 删除之前的 window.flutterWebRenderer 设置脚本 -->
+  
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
