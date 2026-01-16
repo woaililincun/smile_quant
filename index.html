@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- 【关键修复】这行代码必须存在，否则 build 命令会报错 -->
   <base href="/smile_quant/">
+  <!--
+    /*
+     * Copyright 2020 Google LLC
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+  -->
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="SmileQuant">
+  <meta name="description" content="笑脸量化策略日报">
+
+  <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SmileQuant">
+  
+  <!-- 防止用户双指缩放破坏布局 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- 【新增】告诉浏览器：我支持深色模式 -->
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#121212">
+
   <title>SmileQuant</title>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
   <link rel="manifest" href="manifest.json">
 
+  <!-- 【修改】强制背景色和输入框样式 -->
   <style>
-    /* 1. 强制深色背景，防止闪烁 */
-    body { 
-      background-color: #121212; 
-      margin: 0; 
-      height: 100vh; 
-      width: 100vw; 
-      overflow: hidden; 
-      -webkit-tap-highlight-color: transparent;
+    /* 强制 HTML 和 Body 都是黑色，解决闪屏 */
+    html, body {
+      background-color: #121212 !important; /* 强制背景为深色 */
+      color: white; /* 默认文字白色 */
+      overflow: hidden; /* 防止页面边缘出现滚动条 */
     }
     
-    /* 2. 加载动画 */
-    .loading-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    /* 尝试修复原生输入框的光标颜色 */
+    input, textarea {
+      caret-color: #BB86FC !important; /* 强制光标为亮紫色 */
+      color: white !important; /* 输入框内文字白色 */
     }
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #333;
-      border-top: 4px solid #BB86FC;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
-
-  <script>
-    const serviceWorkerVersion = "526155";
-  </script>
-  <!-- 引入刚才生成的 flutter.js -->
-  <script src="flutter.js" defer></script>
 </head>
-<body>
-  <div class="loading-container">
-    <div class="spinner"></div>
-  </div>
 
-  <script>
-    window.addEventListener('load', function(ev) {
-      // 使用 flutter.js 提供的加载器
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          // 【核心】强制使用 canvaskit 渲染，彻底解决华为手机闪烁
-          engineInitializer.initializeEngine({
-            renderer: "canvaskit"
-          }).then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-  </script>
+<body>
+  <!--
+    This script is the entry point for the web application.
+    It loads the Flutter framework and initializes the application.
+    -->
+  <script src="main.dart.js"></script>
 </body>
 </html>
