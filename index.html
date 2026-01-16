@@ -14,7 +14,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-<!-- 强制白底黑字，防止闪烁 -->
+  <!-- 强制白底黑字，防止闪烁 -->
   <style>
     body {
       background-color: #FFFFFF; /* 白底 */
@@ -44,6 +44,16 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- 
+    ★ 核心修复代码 ★ 
+    强制指定渲染模式为 html，解决华为/国产浏览器黑白闪烁 Bug。
+    这行代码的作用等同于在命令行输入 --web-renderer html，
+    但写在这里更稳健，不会报错。
+  -->
+  <script>
+    window.flutterWebRenderer = "html";
+  </script>
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
