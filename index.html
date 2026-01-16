@@ -1,68 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- 【关键修复】这行代码必须存在，否则 build 命令会报错 -->
-  <base href="/smile_quant/">
   <!--
-    /*
-     * Copyright 2020 Google LLC
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
   -->
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="笑脸量化策略日报">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SmileQuant">
-  
-  <!-- 防止用户双指缩放破坏布局 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <!-- 【新增】告诉浏览器：我支持深色模式 -->
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#121212">
-
-  <title>SmileQuant</title>
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <link rel="manifest" href="manifest.json">
-
-  <!-- 【修改】强制背景色和输入框样式 -->
+<!-- 强制白底黑字，防止闪烁 -->
   <style>
-    /* 强制 HTML 和 Body 都是黑色，解决闪屏 */
-    html, body {
-      background-color: #121212 !important; /* 强制背景为深色 */
-      color: white; /* 默认文字白色 */
-      overflow: hidden; /* 防止页面边缘出现滚动条 */
+    body {
+      background-color: #FFFFFF; /* 白底 */
+      color: #000000; /* 黑字 */
     }
-    
-    /* 尝试修复原生输入框的光标颜色 */
+    /* 强制光标蓝色 */
     input, textarea {
-      caret-color: #BB86FC !important; /* 强制光标为亮紫色 */
-      color: white !important; /* 输入框内文字白色 */
+      caret-color: #1976D2 !important; 
     }
   </style>
-</head>
+  <base href="/smile_quant/">
 
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="smile_quant">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>smile_quant</title>
+  <link rel="manifest" href="manifest.json">
+</head>
 <body>
-  <!--
-    This script is the entry point for the web application.
-    It loads the Flutter framework and initializes the application.
-    -->
-  <script src="main.dart.js"></script>
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
